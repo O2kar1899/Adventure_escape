@@ -1,42 +1,59 @@
-
 import sys
-from classes import Character, schlafzimmer 
-from funktionen_wohnung import  change_room, help_command
+from classes import Character
+from wohnung_instances import schlafzimmer
+from wohnung_funktionen import  change_room, help_command, info_command
+from wohnung_tasks import wordle, loeseung_wohnung
 import time
 
 
+
 def befehl_auswerten(input:str, player:str, befehle: list=None)->None:
-    change_room(player=player, input=input)
+    """" This function is used to evaluate the input of the user. """    
         
     if input == "hilfe" or input == "help":
-        help_command()        
+        help_command()
+    if input == "info":
+        info_command(player)        
     if input == "quit" or input == "q":
         sys.exit()
+    aufgabe = change_room(player=player, input=input)
+    if aufgabe == "aufgabe[0]": # player turns pc im arbeitszimmer on
+        wordle()
+    if aufgabe == "aufgabe[1]":
+        pass
+    if aufgabe == "aufgabe[2]":
+        pass
+    if aufgabe == "aufgabe[3]":
+        pass
+    if aufgabe == "aufgabe[4]":
+        pass
+    if aufgabe == "aufgabe[5]":
+        pass
+
 
 def wohnung():
+    """
+    This function is the main function of the world "wohnung".
+    """
     while True:
         time.sleep(0.5)
-        player_input = input("\n\n--> ").lower().strip()
+        player_input = input("\n--> ").lower().strip()
         time.sleep(0.5)   
-        akt_ort = player.location
+        act_location = player.location
         befehl_auswerten(input=player_input, player=player)
-        if akt_ort != player.location:
+        if act_location != player.location:
             print(f"\n{player.location.name}\n{player.location.description}")
-            print("\nAusgänge:")
-            for i in range(len(player.location.exits)):
-                print(f"{player.location.exits[i]}")
-                #print(f"{i.name} - {i.description}")
-            
-            akt_ort = player.location    
+            print(f"\nAusgänge: {player.location.exits}")
+            act_location = player.location    
         else:
             print(f"[Aktueller Ort: {player.location.name}]")      
        
     
-    
+   
  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  # ***************************    Das Spiel beginnt     *********************************
  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
-print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n")
+print("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n")
 print("Das Spiel beginnt!\n")
 time.sleep(1)
 

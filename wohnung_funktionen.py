@@ -1,8 +1,19 @@
-from classes import *
+from wohnung_instances import *
+from wohnung_tasks import wordle
 import sys
+
+def info_command(player):
+    inventar = []
+    for i in player.location.objects:
+        print(i)
+   
+    print(f"Du schaust dich im Raum um und siehst folgendes: {inventar}")
 
 
 def help_command():
+    """_summary_
+    Prints a help text.
+    """
     print("\nHilfe:")
     print("\nDu kannst folgende Befehle eingeben:")      
     print("\nUm den Raum/Ort zu wechseln, gib einfach die Himmelsrichtung (ost, süd, west, nord) \nein in die Du gehen möchtest.")
@@ -11,7 +22,11 @@ def help_command():
     print("\nUm wieder hierher zu kommen gib hilfe oder help ein.")
 
 
+
+
+
 def wohnung_ausgangstuer(player, code:str = "artep"):
+
         door_open = False
         code_input = input("\nDie Ausgang ist verschlossen.\n Um sie zu öffnen, musst Du den Code eingeben:\n -->")
         if code_input == code: 
@@ -27,7 +42,7 @@ def change_room(player, input):
     """
     This function changes the location of the character.
     Locations:
-    arbeitszimmer, bad, balkon, flur, kueche, wohnzimmer, schlafzimmer, abstellkammer
+    [wohnung]
     """
      
     if player.location == arbeitszimmer:                                    # Arbeitszimmer
@@ -38,7 +53,11 @@ def change_room(player, input):
         elif input == "w" or "west" in input:
             player.location = abstellkammer 
         elif input == "n" or "nord" in input:
-            print("Du kannst nicht nach Norden gehen.")                
+            print("Du kannst nicht nach Norden gehen.")
+        # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ aufgabe[0]
+        elif ("ein" in input and "pc" in input) or ("pc" in input and "on" in input):
+            return "aufgabe[0]"
+
     
     elif player.location == bad:                                             # Bad
         if input == "s" or "süd" in input:
@@ -108,8 +127,7 @@ def change_room(player, input):
         elif input == "s" or "süd" in input:
             player.location = balkon_wohnzimmer
         elif input == "w" or "west" in input:
-            player.location = flur
-                    
+            player.location = flur             
     
     
     
