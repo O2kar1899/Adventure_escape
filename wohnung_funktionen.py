@@ -2,6 +2,8 @@ from wohnung_instances import *
 from wohnung_tasks import wordle
 import sys
 
+print("wohnung_funktionen.py wurde geladen.")
+
 def info_command(player):
     inventar = []
     for i in player.location.objects:
@@ -56,7 +58,8 @@ def change_room(player, input):
             print("Du kannst nicht nach Norden gehen.")
         # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ aufgabe[0]
         elif ("ein" in input and "pc" in input) or ("pc" in input and "on" in input):
-            return "aufgabe[0]"
+            return "aufgabe[0]" # main funktion "befehl_auswerten" ruft die Funktion wordle auf
+
 
     
     elif player.location == bad:                                             # Bad

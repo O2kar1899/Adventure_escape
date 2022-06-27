@@ -2,10 +2,10 @@ import sys
 from classes import Character
 from wohnung_instances import schlafzimmer
 from wohnung_funktionen import  change_room, help_command, info_command
-from wohnung_tasks import wordle, loeseung_wohnung
+from wohnung_tasks import task_1, loeseung_wohnung
 import time
 
-
+print("main.py wurde geladen.")
 
 def befehl_auswerten(input:str, player:str, befehle: list=None)->None:
     """" This function is used to evaluate the input of the user. """    
@@ -17,8 +17,8 @@ def befehl_auswerten(input:str, player:str, befehle: list=None)->None:
     if input == "quit" or input == "q":
         sys.exit()
     aufgabe = change_room(player=player, input=input)
-    if aufgabe == "aufgabe[0]": # player turns pc im arbeitszimmer on
-        wordle()
+    if aufgabe == "aufgabe[0]":                                      # player turns pc im arbeitszimmer on
+        task_1()            
     if aufgabe == "aufgabe[1]":
         pass
     if aufgabe == "aufgabe[2]":
