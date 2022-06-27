@@ -1,13 +1,18 @@
 import random as rnd
 import sys
 
-print("wohnung_tasks.py wurde geladen.")
+loesung_wohung_list = ["artep", "rakso", "reuam", "easy!"]
+loesung = rnd.choice(loesung_wohung_list)
+loesung_wohnung = []
 
-loeseung_wohnung = ["a", "r", "t", "e", "p"]
+for i in range(len(loesung)):
+    loesung_wohnung.append(loesung[i])
 loesung_wohnung_gefunden = [None, None, None, None, None]
 
+print(f"wohnung_tasks.py wurde geladen. - {loesung} - {loesung_wohnung[0]} ")
+
 def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einschalten
-    """ player must find a specific word with 5 letters
+    """ wordle player must find a specific word with 5 letters
     """    
     word_list = ["angel", "katze", "mauer", "lauer", "linux", "paul", "charlot", "catharina", "petra", "heiner"]
     word = rnd.choice(word_list)
@@ -28,8 +33,8 @@ def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einsc
                     
         if attemp == word:
             print("Du hast das Wort gefunden!")
-            print (f" Das erste Zeichen: {loeseung_wohnung[0]}")
-            loesung_wohnung_gefunden[0] = loeseung_wohnung[0]
+            print (f" Das erste Zeichen: {loesung_wohnung[0]}")
+            loesung_wohnung_gefunden[0] = loesung_wohnung[0]
             return True
         else:
             for i in range(len(word)):
@@ -43,3 +48,14 @@ def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einsc
     print("\nDu hast das Wort nicht gefunden.\n")
     return False
 
+def task_2():
+    pass
+
+def task_3():
+    pass
+
+def task_4():
+    pass
+
+def task_5():
+    pass

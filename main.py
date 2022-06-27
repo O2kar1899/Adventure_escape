@@ -2,7 +2,7 @@ import sys
 from classes import Character
 from wohnung_instances import schlafzimmer
 from wohnung_funktionen import  change_room, help_command, info_command
-from wohnung_tasks import task_1, loeseung_wohnung
+from wohnung_tasks import task_1, task_2, task_3, task_4, task_5
 import time
 
 print("main.py wurde geladen.")

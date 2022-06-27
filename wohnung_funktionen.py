@@ -1,5 +1,4 @@
 from wohnung_instances import *
-from wohnung_tasks import wordle
 import sys
 
 print("wohnung_funktionen.py wurde geladen.")
