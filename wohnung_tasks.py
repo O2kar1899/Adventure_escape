@@ -1,19 +1,25 @@
 import random as rnd
+from re import L
 import sys
 
-loesung_wohung_list = ["artep", "rakso", "reuam", "easy!"]
+loesung_wohung_list = ["artep", "rakso", "reuam", "easy!"] # 5 Zeichen!
 loesung = rnd.choice(loesung_wohung_list)
 loesung_wohnung = []
 
 for i in range(len(loesung)):
     loesung_wohnung.append(loesung[i])
+
 loesung_wohnung_gefunden = [None, None, None, None, None]
 
-print(f"wohnung_tasks.py wurde geladen. - {loesung} - {loesung_wohnung[0]} ")
 
 def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einschalten
     """ wordle player must find a specific word with 5 letters
-    """    
+    """   
+    if loesung_wohnung[0] == loesung_wohnung_gefunden[0]:
+        print("nach kurzem flackern erscheint auf dem Bildschirm:")
+        print(f"Das erste Zeichen des Codes lautet: {loesung_wohnung[0]}")
+        return None
+
     word_list = ["angel", "katze", "mauer", "lauer", "linux", "paul", "charlot", "catharina", "petra", "heiner"]
     word = rnd.choice(word_list)
         

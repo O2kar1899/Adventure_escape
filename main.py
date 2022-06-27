@@ -25,6 +25,7 @@ def befehl_auswerten(input:str, player:str, befehle: list=None)->None:
         pass
     if aufgabe == "aufgabe[3]":
         pass
+
     if aufgabe == "aufgabe[4]":
         pass
     if aufgabe == "aufgabe[5]":
