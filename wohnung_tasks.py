@@ -1,17 +1,17 @@
 import random as rnd
-from re import L
+from wohnung_instances import coin, piggy_bank
 import sys
 
 loesung_wohung_list = ["artep", "rakso", "reuam", "easy!"] # 5 Zeichen!
 loesung = rnd.choice(loesung_wohung_list)
 loesung_wohnung = []
-
 for i in range(len(loesung)):
     loesung_wohnung.append(loesung[i])
-
 loesung_wohnung_gefunden = ["???", "???", "???", "???", "???"]
+piggy_bank = 0 # Startwert für task_2 - 5 coins in the piggy bank
 
 
+# task_1 Wordle mit variabler Buchstabenanzahl
 def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einschalten
     """ wordle player must find a specific word with 5 letters
     """   
@@ -21,8 +21,7 @@ def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einsc
         
     else:
         word_list = ["angel", "katze", "mauer", "lauer", "linux", "paul", "charlot", "catharina", "petra", "heiner"]
-        word = rnd.choice(word_list) 
-            
+        word = rnd.choice(word_list)             
         print("Der geht nach einigem flackern an. Nach dreimal 'Piep' erscheint folgende Anzeige:\n")
         print("Um das erste Zeichen vom Code zu erhalten, musst Du ein Wort erraten.")
         print(f"Du hast 5 Versuche. Das Wort hat {len(word)} Buchstaben.") 
@@ -37,6 +36,7 @@ def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einsc
             if attemp == word:
                 print("Du hast das Wort gefunden!")
                 print (f" Das erste Zeichen des Codes: {loesung_wohnung[0]}")
+                print("Der Computer schaltet sich mit einem leisen räuspern wieder aus")
                 loesung_wohnung_gefunden[0] = loesung_wohnung[0]
                 return True
             else:
@@ -51,8 +51,18 @@ def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einsc
         print("\nDu hast das Wort nicht gefunden.\n")
         
 
-def task_2():
-    pass
+# task_2 - 5 coins in the piggy bank
+def task_2(player):
+    print(f"Beschreibung Sparschwein")
+    
+    if player.inventory.get(coin) > 0:
+        print("Du hast Münzen in deinem Inventar")
+        print(f"Anzahl der Münzen: {player.inventory.get(coin)}")
+
+    if piggy_bank == 5:
+        print("Aus dem Sparschwein ertönt eine blecherne Stimme:")
+        print(f"Das zweite Zeichen des Codes lautet: {loesung_wohnung[1]}")
+        loesung_wohnung_gefunden[1] = loesung_wohnung[1]
 
 def task_3():
     pass

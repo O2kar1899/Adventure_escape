@@ -40,8 +40,15 @@ schreibtisch_arbeitszimmer = Object( # Arbeitszimmer --> Wohnung
     description="Ein schwarzer Schreibtisch.",
     inventory=[schreibtisch_schublade],
     portable=False,
-    weight=None
-    
+    weight=None    
+    )
+
+piggy_bank = Object(
+    name="Sparschwein",
+    description="Auf den ersten Blick, ein ganz normales Sparschwein.\nAuf der Seite steh in sehr kleiner Schrift: Soll ich Dein Helfer sein, wirf Münzen rein.",
+    inventory=None,
+    portable=True,
+    weight=500
     )
 
 
@@ -49,8 +56,7 @@ schreibtisch_arbeitszimmer = Object( # Arbeitszimmer --> Wohnung
 computer_arbeitszimmer = Device(
     name="Computer im Arbeitszimmer",
     description= "Ein Computer mit einer grauen Tastatur und einem schwarzen Bildschirm.", 
-    portable=False,
-      
+    portable=False,      
     power = False,
     power_string="ausgeschaltet"
     )
@@ -90,6 +96,7 @@ abstellkammer = Location(
 bad = Location(
     name = "Bad", 
     description="Ein schönes Bad mit einem WC, einer Dusche und einer kleinen Badewanne. Nach Westen kommst Du auf den Balkon ", 
+    exits=["Westen","Süden" ],
     objects=None
     )
 

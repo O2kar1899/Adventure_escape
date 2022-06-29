@@ -1,7 +1,7 @@
 from wohnung_instances import player, abstellkammer, arbeitszimmer, bad, balkon_schlafzimmer, \
     balkon_wohnzimmer, balkon_schlafzimmer, flur, kueche, schlafzimmer, wohnzimmer,\
         computer_arbeitszimmer 
-from wohnung_tasks import loesung, loesung_wohnung_gefunden 
+from wohnung_tasks import loesung, loesung_wohnung_gefunden, task_1 
 import sys
 
 print("wohnung_funktionen.py wurde geladen.")
@@ -41,6 +41,18 @@ def input_answer(question:str="--> "):
         answer = input(question).lower().strip()
         return answer
 
+def room_acivity(player, input):
+    if player.location == arbeitszimmer:
+        if input == "computer"  or input == "pc":
+            print("Willst Du den Computer anschauen oder einschalten?")
+            if input_answer("--> ") == "einschalten":
+                task_1()
+            elif input_answer("--> ") == "anschauen":
+                print(computer_arbeitszimmer.description)
+            else:
+                print("\nDu kannst den Computer nur einschalten oder anschauen. Zu mehr ist er nicht zu gebrauchen.")
+
+
 def change_room(player, input):
     """
     This function changes the location of the character.
@@ -53,18 +65,8 @@ def change_room(player, input):
         elif input == "w" or "west" in input:
             player.location = abstellkammer 
         elif input == "n" or "nord" in input:
-            print("Du kannst nicht nach Norden gehen.")
-        # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ aufgabe[0]
-        elif input == "computer"  or input == "pc":
-            print("Willst Du den Computer anschauen oder einschalten?")
-            if input_answer("--> ") == "einschalten":
-                return "aufgabe[0]"
-            elif input_answer("--> ") == "anschauen":
-                print(computer_arbeitszimmer.description)
-            else:
-                print("\nDu kannst den Computer nur einschalten oder anschauen. Zu mehr ist er nicht zu gebrauchen.")
-            
-        
+            print("Du kannst nicht nach Norden gehen.")        
+                    
     
     if player.location == abstellkammer:                                       # Abstellkammer
         if input == "s" or "süd" in input:
@@ -143,10 +145,5 @@ def change_room(player, input):
         elif input == "s" or "süd" in input:
             player.location = balkon_wohnzimmer
         elif input == "w" or "west" in input:
-            player.location = flur             
-    
-    
-    
-       
-
-  
+            player.location = flur   
+          

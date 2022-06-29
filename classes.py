@@ -4,14 +4,6 @@ from operator import inv
 
 
 class Object:
-    """args:
-        name: str
-        description: str
-        inventory: list
-        portable: bool
-        weight: int
-
-    """
     def __init__(self, name:str, description:str, inventory: list =None, portable: bool =True, weight: int =0):
         self.name = name
         self.description = description
@@ -43,11 +35,12 @@ class Device(Object):
        
 # ++++++++++++++++++++++++++++++ class Location ++++++++++++++++++++++++++++++
 class Location:
-    def __init__(self, name: str, description: str, exits=None, objects: Object=None):
+    def __init__(self, name: str, description: str, exits=None, objects: Object=None, inventory: dict=None):
         self.name = name
         self.description = description
         self.exits = exits
-        self.objects = objects          
+        self.objects = objects
+        self.inventory = inventory         
       
     
     def __repr__(self) -> str:
@@ -55,7 +48,7 @@ class Location:
 
 # ++++++++++++++++++++++++++++++ class Character ++++++++++++++++++++++++++++++
 class Character:
-    def __init__(self, name: str, health:int, damage: int, location: Location, welt: str):
+    def __init__(self, name: str="", health:int=100, damage: int=0, location: Location=None, welt: str=None):
         self.name = name
         self.health = health
         self.damage = damage

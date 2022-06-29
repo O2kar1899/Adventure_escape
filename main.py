@@ -1,7 +1,7 @@
 import sys
 
-from wohnung_instances import player, schlafzimmer # im Schlafzimmer startet die Welt "wohnung"
-from wohnung_funktionen import  change_room, help_command, info_command
+from wohnung_instances import player, schlafzimmer, coin # im Schlafzimmer startet die Welt "wohnung"
+from wohnung_funktionen import  change_room, help_command, info_command, room_acivity
 from wohnung_tasks import task_1, task_2, task_3, task_4, task_5
 import time
 
@@ -17,21 +17,9 @@ def wohnung_befehl_auswerten(input:str, player:str)->None:
     if input == "quit" or input == "q":
         sys.exit()
     else:
-        aufgabe = change_room(player=player, input=input)
-        if aufgabe == "aufgabe[0]":                                      # player turns pc in "arbeitszimmer" on
-            task_1()            
-        if aufgabe == "aufgabe[1]":
-            pass
-        if aufgabe == "aufgabe[2]":
-            pass
+        change_room(player=player, input=input)
+        room_acivity(player=player, input=input)
 
-        if aufgabe == "aufgabe[3]":
-            pass
-
-        if aufgabe == "aufgabe[4]":
-            pass
-        if aufgabe == "aufgabe[5]":
-            pass 
 
 
 def wohnung():
@@ -46,7 +34,7 @@ def wohnung():
     print(f"\nDu hörst die freundliche Stimme einer Sprachbox neben dem Bett: Guten morgen {player.name},\n")
     print("Zurzeit sind es 19 Grad Celsius und Sonnenschein.\n") 
     print(f"\n[{player.location.description}.]")
-
+    task_2(player)
     while True:
         time.sleep(0.5)
         player_input = input("\n--> ").lower().strip()
@@ -73,6 +61,7 @@ time.sleep(1)
 player.name = input("Gib bitte Deinen Spielernamen ein? ")
 player.welt = "wohnung" # Das Spiel startet in der Welt "wohnung"
 player.location = schlafzimmer # Das Spiel startet im Schlafzimmer
+player.inventory = {coin:1}
 
 
 if player.welt == "wohnung":
