@@ -1,4 +1,7 @@
-from wohnung_instances import *
+from wohnung_instances import player, abstellkammer, arbeitszimmer, bad, balkon_schlafzimmer, \
+    balkon_wohnzimmer, balkon_schlafzimmer, flur, kueche, schlafzimmer, wohnzimmer,\
+        computer_arbeitszimmer 
+from wohnung_tasks import loesung, loesung_wohnung_gefunden 
 import sys
 
 print("wohnung_funktionen.py wurde geladen.")
@@ -15,37 +18,33 @@ def help_command():
     """_summary_
     Prints a help text.
     """
-    print("\nHilfe:")
-    print("\nDu kannst folgende Befehle eingeben:")      
-    print("\nUm den Raum/Ort zu wechseln, gib einfach die Himmelsrichtung (ost, süd, west, nord) \nein in die Du gehen möchtest.")
-    print("\nWährend Deines Abenteuers werden Dir weitere Befehle angeboten.\n Um einen Befel einzugeben, gib einfach den Befehl ein.")
-    print("\nUm zu sehen, was in diesem Raum ist, gib einfach 'info' ein.")
-    print("\nUm wieder hierher zu kommen gib hilfe oder help ein.")
+    print("Hilfe:")
+    print("Du kannst folgende Befehle eingeben:")      
+    print("Um den Raum/Ort zu wechseln, gib einfach die Himmelsrichtung (ost, süd, west, nord) \nein in die Du gehen möchtest.")
+    print("Wenn Du etwas mit einem Gegenstand tun möchtest, gib den Namen des Gegenstandes ein.")
+    print("Um zu sehen, was in diesem Raum ist, gib einfach 'info' ein.")
+    print("Um wieder hierher zu kommen gib hilfe oder help ein.")
+    print(f"Aktueller Ort: {player.location.name}")
+    print(f"Das Lösungswort: {loesung_wohnung_gefunden}")
 
-
-
-
-
-def wohnung_ausgangstuer(player, code:str = "artep"):
-
-        door_open = False
-        code_input = input("\nDie Ausgang ist verschlossen.\n Um sie zu öffnen, musst Du den Code eingeben:\n -->")
-        if code_input == code: 
-            door_open = True
+def wohnung_ausgangstuer():
+        code_input = input("\nDie Ausgangstür ist verschlossen. Um sie zu öffnen, musst Du den Code eingeben:\n --> ")
+        if code_input == loesung: 
             print("\nDu hast den Code erfolgreich eingegeben.\nDie Tür ist jetzt offen.")
             print("\nDu hast gewonnen! Das Spiel ist vorbei.\n")
             sys.exit()
             #player.location = outside
         else:
-            print("\nDer Code ist falsch.\nDie Tür bleibt verschlossen.")
+            print("Der Code ist falsch.\nDie Tür bleibt verschlossen.")
+
+def input_answer(question:str="--> "):
+        answer = input(question).lower().strip()
+        return answer
 
 def change_room(player, input):
     """
     This function changes the location of the character.
-    Locations:
-    [wohnung]
-    """
-     
+    """      
     if player.location == arbeitszimmer:                                    # Arbeitszimmer
         if input == "s" or "süd" in input:
             player.location = wohnzimmer
@@ -56,9 +55,23 @@ def change_room(player, input):
         elif input == "n" or "nord" in input:
             print("Du kannst nicht nach Norden gehen.")
         # +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ aufgabe[0]
-        elif ("ein" in input and "pc" in input) or ("pc" in input and "on" in input):
-            return "aufgabe[0]" # main funktion "befehl_auswerten" ruft die Funktion wordle auf
-
+        elif input == "computer"  or input == "pc":
+            print("Willst Du den Computer anschauen oder einschalten?")
+            if input_answer("--> ") == "einschalten":
+                return "aufgabe[0]"
+            elif input_answer("--> ") == "anschauen":
+                print(computer_arbeitszimmer.description)
+            else:
+                print("\nDu kannst den Computer nur einschalten oder anschauen. Zu mehr ist er nicht zu gebrauchen.")
+            
+        
+    
+    if player.location == abstellkammer:                                       # Abstellkammer
+        if input == "s" or "süd" in input:
+            player.location = flur
+        elif input == "o" or "ost" in input:
+            player.location = arbeitszimmer
+        else: help_command()
 
     
     elif player.location == bad:                                             # Bad
@@ -91,7 +104,7 @@ def change_room(player, input):
         elif input == "s" or "süd" in input:
             print("Du kannst nicht nach Süden gehen.")
     
-    elif player.location == flur:                                               # Flur
+    elif player.location == flur:                                               # Flur (AUSGANG)
         if input == "n" or "nord" in input:
             player.location = abstellkammer
         elif input == "o" or "ost" in input:
@@ -100,7 +113,8 @@ def change_room(player, input):
             player.location = kueche
         elif input == "w" or "west" in input:
             wohnung_ausgangstuer(player)
-    
+            
+
     elif player.location == kueche:                                            # Kueche
         if input == "n" or "nord" in input:
             player.location = flur

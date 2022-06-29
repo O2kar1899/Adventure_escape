@@ -1,21 +1,42 @@
 
 # ++++++++++++++++++++++++++++++ class Object ++++++++++++++++++++++++++++++
+from operator import inv
+
+
 class Object:
-    def __init__(self, name:str, description:str, inventory: list =None, portable: bool =True):
+    """args:
+        name: str
+        description: str
+        inventory: list
+        portable: bool
+        weight: int
+
+    """
+    def __init__(self, name:str, description:str, inventory: list =None, portable: bool =True, weight: int =0):
         self.name = name
         self.description = description
         self.portable = portable
         self.inventory = inventory
+        self.weight = weight
     
     def __str__(self):
         return f"Name: {self.name}\nDescription: {self.description}\nPortable: {self.portable}"
 
 # ++++++++++++++++++++++++++++++ class Device ++++++++++++++++++++++++++++++
 class Device(Object):
-    def __init__(self, name:int, description:str, portable: bool =True, power_string: str ="aus", power: bool =False):
-        super().__init__(name, description, portable)    
+    def __init__(
+        self, name:str, 
+        description:str, 
+        inventory: list =None, 
+        portable: bool =True, 
+        weight: int =0,
+        power: bool =False,
+        power_string: str ="aus"
+        ):
+        super().__init__(name, description, inventory, portable, weight)
         self.power = power
         self.power_string = power_string
+        
         
     def __str__(self):
         return f"Name: {self.name}\nDescription: {self.description}\nPortable: {self.portable}\nPower: {self.power}"

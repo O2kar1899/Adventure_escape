@@ -1,30 +1,56 @@
-from classes import Location, Object, Device
+from classes import Location, Object, Device, Character
+
+player = Character()
+
 # **************************  objects Wohnung **************************
-blumentopf_1 = Object(name="Blumentopf", 
-description="Ein mittelgroßer Blumentopf, mit einer gelben Blume.")
+blumentopf_1 = Object(
+    name="Blumentopf",
+    inventory=None,
+    description="Ein mittelgroßer Blumentopf, mit einer gelben Blume.",
+    portable=True,
+    weight=500
+    )
+
+coin = Object(
+    name="Münze",
+    inventory=None,
+    description="Eine goldene Münze.",
+    portable=True,
+    weight=10
+    )
 
 schrank_arbeitszimmer = Object( # --> Arbeitzimmer
     name="Schrank im Arbeitszimmer", 
-    description="Ein weißer Schrank aus einem schwedischen Möbelhaus.")
+    description="Ein weißer Schrank aus einem schwedischen Möbelhaus.",
+    inventory=None,
+    portable=False,
+    weight=None
+    )
 
 schreibtisch_schublade = Object( # --> Schreibtisch --> Arbeitszimmer --> Wohnung
     name="Schreibtisch-Schublade",
     description="Eine Schublade aus einem schwedischen Schreibtisch.",
-    portable=False
+    inventory=[coin],
+    portable=False,
+    weight=None
     )
 
 schreibtisch_arbeitszimmer = Object( # Arbeitszimmer --> Wohnung
-    name="Schreibtisch im Arbeitszimmer", 
+    name="Schreibtisch", 
     description="Ein schwarzer Schreibtisch.",
-    portable=False,
     inventory=[schreibtisch_schublade],
+    portable=False,
+    weight=None
+    
     )
 
 
 # **************************  devices **************************
-computer_arbeitszimmer = Device(name="Computer im Arbeitszimmer",
+computer_arbeitszimmer = Device(
+    name="Computer im Arbeitszimmer",
     description= "Ein Computer mit einer grauen Tastatur und einem schwarzen Bildschirm.", 
-    portable=False,    
+    portable=False,
+      
     power = False,
     power_string="ausgeschaltet"
     )
@@ -92,12 +118,6 @@ kueche = Location(
     exits=["osten", "norden"],
     objects=["Herd", "Kühlschrank", "Schrank"]
     )   
-
-no_exit = Location(
-    name="No_Exit",
-    description="Hier geht es nicht weiter",
-    objects=None  
-    )
 
 schlafzimmer = Location(
     name="Schlafzimmer", 
