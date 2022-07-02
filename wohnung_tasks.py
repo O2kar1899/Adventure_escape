@@ -8,7 +8,7 @@ loesung_wohnung = []
 for i in range(len(loesung)):
     loesung_wohnung.append(loesung[i])
 loesung_wohnung_gefunden = ["???", "???", "???", "???", "???"]
-piggy_bank = 0 # Startwert für task_2 - 5 coins in the piggy bank
+
 
 
 # task_1 Wordle mit variabler Buchstabenanzahl
@@ -49,20 +49,24 @@ def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einsc
                         print(f"{attemp[i]} ist nicht im Wort vorhanden")         
                 print(f"Du hast noch {5-t} Versuche.")    
         print("\nDu hast das Wort nicht gefunden.\n")
+        print("...versuch es später nochmal!")
         
 
 # task_2 - 5 coins in the piggy bank
 def task_2(player):
     print(f"Beschreibung Sparschwein")
-    
-    if player.inventory.get(coin) > 0:
+    coins_player = player.inventory.get(coin)
+    if coins_player > 0:
         print("Du hast Münzen in deinem Inventar")
-        print(f"Anzahl der Münzen: {player.inventory.get(coin)}")
+        print(f"Anzahl der Münzen: {coins_player}")
+    
+    coins_piggy = piggy_bank.inventory.get(coin)
+    print(f"Anzahl der Münzen im Sparschwein: {coins_piggy}")
 
-    if piggy_bank == 5:
-        print("Aus dem Sparschwein ertönt eine blecherne Stimme:")
-        print(f"Das zweite Zeichen des Codes lautet: {loesung_wohnung[1]}")
-        loesung_wohnung_gefunden[1] = loesung_wohnung[1]
+    # if piggy_bank.inventory >= 5:
+    #     print("Aus dem Sparschwein ertönt eine blecherne Stimme:")
+    #     print(f"Das zweite Zeichen des Codes lautet: {loesung_wohnung[1]}")
+    #     loesung_wohnung_gefunden[1] = loesung_wohnung[1]
 
 def task_3():
     pass

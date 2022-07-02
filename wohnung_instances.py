@@ -13,7 +13,6 @@ blumentopf_1 = Object(
 
 coin = Object(
     name="Münze",
-    inventory=None,
     description="Eine goldene Münze.",
     portable=True,
     weight=10
@@ -30,7 +29,7 @@ schrank_arbeitszimmer = Object( # --> Arbeitzimmer
 schreibtisch_schublade = Object( # --> Schreibtisch --> Arbeitszimmer --> Wohnung
     name="Schreibtisch-Schublade",
     description="Eine Schublade aus einem schwedischen Schreibtisch.",
-    inventory=[coin],
+    inventory={"coin":1},
     portable=False,
     weight=None
     )
@@ -46,7 +45,7 @@ schreibtisch_arbeitszimmer = Object( # Arbeitszimmer --> Wohnung
 piggy_bank = Object(
     name="Sparschwein",
     description="Auf den ersten Blick, ein ganz normales Sparschwein.\nAuf der Seite steh in sehr kleiner Schrift: Soll ich Dein Helfer sein, wirf Münzen rein.",
-    inventory=None,
+    inventory={"coin":0},
     portable=True,
     weight=500
     )
@@ -82,15 +81,17 @@ arbeitszimmer = Location(
         Auf dem Bücherregal stehen einige Bücher. Gegenüber steht ein Schrank. \
         Im Süden liegt das Wohnzimmer. Im Osten das Bad und im Westen eine kleine Abstellkammer.",
     exits=["Osten", "Süden", "Westen"],
-    objects=[schreibtisch_arbeitszimmer, schrank_arbeitszimmer, computer_arbeitszimmer, bildschirm_schwarz, schreibtischlampe], 
+    objects={"Schreibtisch":schreibtisch_arbeitszimmer, "Schrank":schrank_arbeitszimmer, "Computer":computer_arbeitszimmer} 
     )
+
+
      
 abstellkammer = Location(
     name="Abstellkammer",
     description="Ein kleiner Raum in dem man Dinge unterbringen kann, die man zurzeit nicht braucht. \
             Im Osten liegt das Arbeitszimmer, nach Süden kommst Du in den Flur",
     exits=["Osten","Süden"],
-    objects=["Gegenstände"]
+    objects=None
     )
 
 bad = Location(
@@ -109,7 +110,7 @@ balkon_schlafzimmer = Location(
 balkon_wohnzimmer = Location(
     name="Wohnzimmer-Balkon",
     description="Im Nordn liegt das Wohnzimmer. Nach Osten kommst Du auf einen anderen Balkon. Nach Westen kommst Du in die Küche ",
-    objects=["Liegestuhl", blumentopf_1, "Kerzenständer"]
+    objects=["Liegestuhl", "blumentopf_1", "Kerzenständer"]
     )
 
 flur = Location(
@@ -131,7 +132,8 @@ schlafzimmer = Location(
     description="Du bis im Schlafzimmer. Es lieg im Osten der Wohnung. Im Norden ist ein kleines Bad.  \
         \nIm Süden kommst Du auf einen kleinen Balkon und nach Westen ins Woznzimmer",
     exits=["norden", "sueden", "westen"],
-    objects=["Bett","Schrank","Wäschekorb"]    
+    objects=["Bett","Schrank","Wäschekorb"],
+    inventory=["Bett", "Schrank", "Nachttisch"] 
     )  
 
 wohnzimmer = Location(

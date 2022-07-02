@@ -1,31 +1,35 @@
 from wohnung_instances import player, abstellkammer, arbeitszimmer, bad, balkon_schlafzimmer, \
     balkon_wohnzimmer, balkon_schlafzimmer, flur, kueche, schlafzimmer, wohnzimmer,\
         computer_arbeitszimmer 
+from classes import *
 from wohnung_tasks import loesung, loesung_wohnung_gefunden, task_1 
 import sys
 
 print("wohnung_funktionen.py wurde geladen.")
 
-def info_command(player):
-    inventar = []
-    for i in player.location.objects:
-        print(i)
-   
-    print(f"Du schaust dich im Raum um und siehst folgendes: {inventar}")
 
 
+def info_command(location):
+    print("INFO:")
+    print(f"Aktueller Ort: {location.name}")
+    if location.objects != None:
+        print(f"Im Raum befinden sich folgende Gegenstände:")
+        for a in location.objects:
+            print(a)
+    
+    
 def help_command():
     """_summary_
     Prints a help text.
     """
     print("Hilfe:")
     print("Du kannst folgende Befehle eingeben:")      
-    print("Um den Raum/Ort zu wechseln, gib einfach die Himmelsrichtung (ost, süd, west, nord) \nein in die Du gehen möchtest.")
-    print("Wenn Du etwas mit einem Gegenstand tun möchtest, gib den Namen des Gegenstandes ein.")
-    print("Um zu sehen, was in diesem Raum ist, gib einfach 'info' ein.")
-    print("Um wieder hierher zu kommen gib hilfe oder help ein.")
+    print("Raum wechseln: ost, süd, west oder nord")
+    print("Wenn Du etwas mit einem Gegenstand tun möchtest: Namen des Gegenstands")
+    print("Um zu sehen, was sich im aktuellen Raum befindet: info")
+    print("Um wieder hierher zu kommen: hilfe oder help")
     print(f"Aktueller Ort: {player.location.name}")
-    print(f"Das Lösungswort: {loesung_wohnung_gefunden}")
+    #print(f"Das Lösungswort: {loesung_wohnung_gefunden}")
 
 def wohnung_ausgangstuer():
         code_input = input("\nDie Ausgangstür ist verschlossen. Um sie zu öffnen, musst Du den Code eingeben:\n --> ")

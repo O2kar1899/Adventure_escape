@@ -1,10 +1,10 @@
 
 # ++++++++++++++++++++++++++++++ class Object ++++++++++++++++++++++++++++++
-from operator import inv
+
 
 
 class Object:
-    def __init__(self, name:str, description:str, inventory: list =None, portable: bool =True, weight: int =0):
+    def __init__(self, name:str="", description:str="", inventory=None, portable: bool =True, weight: int =0):
         self.name = name
         self.description = description
         self.portable = portable
@@ -35,7 +35,7 @@ class Device(Object):
        
 # ++++++++++++++++++++++++++++++ class Location ++++++++++++++++++++++++++++++
 class Location:
-    def __init__(self, name: str, description: str, exits=None, objects: Object=None, inventory: dict=None):
+    def __init__(self, name: str, description: str, exits=None, objects: list=None, inventory: dict=None):
         self.name = name
         self.description = description
         self.exits = exits
@@ -43,8 +43,8 @@ class Location:
         self.inventory = inventory         
       
     
-    def __repr__(self) -> str:
-        return f"Name: {self.name}\nDescription:{self.description}\nobjects: {self.objects}"
+    def __str__(self) -> str:
+        return f"Name: {self.name}\nDescription:{self.description}\nobjects: {self.objects}, inventory: {self.inventory}"
 
 # ++++++++++++++++++++++++++++++ class Character ++++++++++++++++++++++++++++++
 class Character:
