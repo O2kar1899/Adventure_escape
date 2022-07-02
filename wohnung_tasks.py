@@ -55,18 +55,28 @@ def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einsc
 # task_2 - 5 coins in the piggy bank
 def task_2(player):
     print(f"Beschreibung Sparschwein")
-    coins_player = player.inventory.get(coin)
-    if coins_player > 0:
-        print("Du hast Münzen in deinem Inventar")
-        print(f"Anzahl der Münzen: {coins_player}")
-    
     coins_piggy = piggy_bank.inventory.get(coin)
     print(f"Anzahl der Münzen im Sparschwein: {coins_piggy}")
-
-    # if piggy_bank.inventory >= 5:
-    #     print("Aus dem Sparschwein ertönt eine blecherne Stimme:")
-    #     print(f"Das zweite Zeichen des Codes lautet: {loesung_wohnung[1]}")
-    #     loesung_wohnung_gefunden[1] = loesung_wohnung[1]
+    
+    coins_player = player.inventory.get(coin)
+    if coins_player > 0:
+        print(f"Du hast {coins_player} Münzen in deinem Inventar")
+        while True:
+            answer = input("Möchtest Du eine Münze in das Sparschwein legen Ja/Nein? ").lower().strip()
+            if answer == "ja":
+                print("Du wirfst eine Münze in das Sparschwein und stelltst es wieder an seinen Platz.")
+                piggy_bank.inventory[coin] += 1
+                player.inventory[coin] -= 1
+                break
+            elif answer == "nein":
+                print("Du stellst das Sparschwein wieder auf seinen Platz")
+                break
+            else: print ("Das ist keine gültige Eingabe!")
+    
+    if piggy_bank.inventory >= 5:
+        print("Aus dem Sparschwein ertönt eine blecherne Stimme:")
+        print(f"Das zweite Zeichen des Codes lautet: {loesung_wohnung[1]}")
+        loesung_wohnung_gefunden[1] = loesung_wohnung[1]
 
 def task_3():
     pass

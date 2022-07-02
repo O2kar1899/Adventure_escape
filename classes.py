@@ -35,7 +35,7 @@ class Device(Object):
        
 # ++++++++++++++++++++++++++++++ class Location ++++++++++++++++++++++++++++++
 class Location:
-    def __init__(self, name: str, description: str, exits=None, objects: list=None, inventory: dict=None):
+    def __init__(self, name: str, description: str, exits=None, objects: dict=None, inventory: dict=None):
         self.name = name
         self.description = description
         self.exits = exits

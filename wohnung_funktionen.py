@@ -41,7 +41,7 @@ def wohnung_ausgangstuer():
         else:
             print("Der Code ist falsch.\nDie Tür bleibt verschlossen.")
 
-def input_answer(question:str="--> "):
+def input_answer(question:str="--> ") -> str:
         answer = input(question).lower().strip()
         return answer
 

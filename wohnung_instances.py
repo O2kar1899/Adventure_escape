@@ -5,7 +5,6 @@ player = Character()
 # **************************  objects Wohnung **************************
 blumentopf_1 = Object(
     name="Blumentopf",
-    inventory=None,
     description="Ein mittelgroßer Blumentopf, mit einer gelben Blume.",
     portable=True,
     weight=500
@@ -37,7 +36,7 @@ schreibtisch_schublade = Object( # --> Schreibtisch --> Arbeitszimmer --> Wohnun
 schreibtisch_arbeitszimmer = Object( # Arbeitszimmer --> Wohnung
     name="Schreibtisch", 
     description="Ein schwarzer Schreibtisch.",
-    inventory=[schreibtisch_schublade],
+    inventory={"Schublade":schreibtisch_schublade},
     portable=False,
     weight=None    
     )
@@ -83,9 +82,7 @@ arbeitszimmer = Location(
     exits=["Osten", "Süden", "Westen"],
     objects={"Schreibtisch":schreibtisch_arbeitszimmer, "Schrank":schrank_arbeitszimmer, "Computer":computer_arbeitszimmer} 
     )
-
-
-     
+    
 abstellkammer = Location(
     name="Abstellkammer",
     description="Ein kleiner Raum in dem man Dinge unterbringen kann, die man zurzeit nicht braucht. \
@@ -110,21 +107,21 @@ balkon_schlafzimmer = Location(
 balkon_wohnzimmer = Location(
     name="Wohnzimmer-Balkon",
     description="Im Nordn liegt das Wohnzimmer. Nach Osten kommst Du auf einen anderen Balkon. Nach Westen kommst Du in die Küche ",
-    objects=["Liegestuhl", "blumentopf_1", "Kerzenständer"]
+    objects={"Liegestuhl":None, "blumentopf_1":None, "Kerzenständer":None}
     )
 
 flur = Location(
     name="Flur",
     description="Im Osten liegt das Wohnzimmer. Nach Süden kommst Du in die Küche.\nNach Norden kommst Du in die Abstellkammer Im Westen ist der Ausgan der Wohnungn",
     exits=["norden", "osten", "sueden", "westen"],    
-    objects=["Garderobe", "Schuhschrank"]
+    objects={"Garderobe":None, "Schuhschrank":None}
     )
 
 kueche = Location(
     name="Küche", 
     description="Im Norden lieg der Flur. Nach Osten kommst Du auf einen Balkon",
     exits=["osten", "norden"],
-    objects=["Herd", "Kühlschrank", "Schrank"]
+    objects={"Herd":None, "Kühlschrank":None, "Schrank":None}
     )   
 
 schlafzimmer = Location(
@@ -132,8 +129,7 @@ schlafzimmer = Location(
     description="Du bis im Schlafzimmer. Es lieg im Osten der Wohnung. Im Norden ist ein kleines Bad.  \
         \nIm Süden kommst Du auf einen kleinen Balkon und nach Westen ins Woznzimmer",
     exits=["norden", "sueden", "westen"],
-    objects=["Bett","Schrank","Wäschekorb"],
-    inventory=["Bett", "Schrank", "Nachttisch"] 
+    objects={"Bett":None, "Schrank":None, "Nachttisch":None},
     )  
 
 wohnzimmer = Location(
@@ -142,11 +138,6 @@ wohnzimmer = Location(
         \nIm Süden ist ein großer Balkon mit vielen Blumen. \
         \nNach Westen kommst Du in den Flur. Im Osten liegt das Schlafzimmer",
     exits=["norden", "osten", "sueden", "westen"], 
-    objects=["Sofa","Schrank","Ferseher","Tisch"]
+    objects={"Sofa":None,"Schrank":None,"Ferseher":None,"Tisch":None,"Sparschwein": piggy_bank}
     )
 
-no_exit = Location(
-    name="Kein Ausgang",
-    description="Hier geht es nicht weiter",
-    objects=None
-    )
