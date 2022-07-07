@@ -4,28 +4,31 @@
 
 
 class Object:
-    def __init__(self, name:str="", description:str="", inventory=None, portable: bool =True, weight: int =0):
+    def __init__(self, name:str="", description:str="", inventory=None, portable: bool =True, weight: int =0, eigenschaft: dict=None):
         self.name = name
         self.description = description
         self.portable = portable
         self.inventory = inventory
         self.weight = weight
+        self.eigenschaft = eigenschaft
     
     def __str__(self):
         return f"Name: {self.name}\nDescription: {self.description}\nPortable: {self.portable}"
 
 # ++++++++++++++++++++++++++++++ class Device ++++++++++++++++++++++++++++++
 class Device(Object):
-    def __init__(
-        self, name:str, 
+    def __init__(        
+        self, 
+        name:str, 
         description:str, 
         inventory: list =None, 
         portable: bool =True, 
         weight: int =0,
         power: bool =False,
-        power_string: str ="aus"
+        power_string: str ="aus",
+        eigenschaft: dict=None
         ):
-        super().__init__(name, description, inventory, portable, weight)
+        super().__init__(name, description, inventory, portable, weight, eigenschaft)
         self.power = power
         self.power_string = power_string
         
@@ -48,13 +51,13 @@ class Location:
 
 # ++++++++++++++++++++++++++++++ class Character ++++++++++++++++++++++++++++++
 class Character:
-    def __init__(self, name: str="", health:int=100, damage: int=0, location: Location=None, welt: str=None):
+    def __init__(self, name: str="", health:int=100, damage: int=0, location: Location=None, welt: str=None, inventory: dict=None):
         self.name = name
         self.health = health
         self.damage = damage
         self.location = location
         self.welt = welt
-        self.inventory = []
+        self.inventory = inventory
        
     def set_location(self, location):
         self.location = location

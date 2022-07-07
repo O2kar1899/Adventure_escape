@@ -10,9 +10,8 @@ for i in range(len(loesung)):
 loesung_wohnung_gefunden = ["???", "???", "???", "???", "???"]
 
 
-
 # task_1 Wordle mit variabler Buchstabenanzahl
-def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einschalten
+def task_1_wordle(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einschalten
     """ wordle player must find a specific word with 5 letters
     """   
     if loesung_wohnung[0] == loesung_wohnung_gefunden[0]:
@@ -22,7 +21,7 @@ def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einsc
     else:
         word_list = ["angel", "katze", "mauer", "lauer", "linux", "paul", "charlot", "catharina", "petra", "heiner"]
         word = rnd.choice(word_list)             
-        print("Der geht nach einigem flackern an. Nach dreimal 'Piep' erscheint folgende Anzeige:\n")
+        print("Der Computer geht nach einigem flackern an. Nach drei mürrischen piepsern erscheint folgende Anzeige:\n")
         print("Um das erste Zeichen vom Code zu erhalten, musst Du ein Wort erraten.")
         print(f"Du hast 5 Versuche. Das Wort hat {len(word)} Buchstaben.") 
         print("Nach jedem Versuch bekommst Du für jeden eingegebenen Buchstaben mitgeteilt,")
@@ -53,27 +52,34 @@ def task_1(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einsc
         
 
 # task_2 - 5 coins in the piggy bank
-def task_2(player):
-    print(f"Beschreibung Sparschwein")
-    coins_piggy = piggy_bank.inventory.get(coin)
-    print(f"Anzahl der Münzen im Sparschwein: {coins_piggy}")
+def task_2_coins(player):
+    print(piggy_bank.description)
+    print(f"Anzahl der Münzen im Sparschwein: {piggy_bank.inventory['coin']}")
     
-    coins_player = player.inventory.get(coin)
+    coins_player = player.inventory["coin"]
+    """Orte der Münzen:
+        - Arbeitszimmer - Schreibtisch - Schublade
+        - Küche - Kühlschrank
+        - Balkon_wohnzimmer - blumentopf_1
+        - Flur - Schuhschrank - schwarze Schuhe
+        - Schlafzimmer - Nachttisch
+    """
     if coins_player > 0:
-        print(f"Du hast {coins_player} Münzen in deinem Inventar")
+        print(f"Du hast {coins_player} Münzen in deinem Inventar\n")
         while True:
-            answer = input("Möchtest Du eine Münze in das Sparschwein legen Ja/Nein? ").lower().strip()
+            answer = input("Möchtest Du die Münze(n) in das Sparschwein legen Ja/Nein? ").lower().strip()
             if answer == "ja":
                 print("Du wirfst eine Münze in das Sparschwein und stelltst es wieder an seinen Platz.")
-                piggy_bank.inventory[coin] += 1
-                player.inventory[coin] -= 1
+                piggy_bank.inventory["coin"] += coins_player
+                player.inventory["coin"] = 0
+                print(f"Anzahl der Münzen im Sparschwein: {piggy_bank.inventory['coin']}")
                 break
             elif answer == "nein":
-                print("Du stellst das Sparschwein wieder auf seinen Platz")
+                print("Du stellst das Sparschwein wieder auf seinen Platz")                
                 break
             else: print ("Das ist keine gültige Eingabe!")
     
-    if piggy_bank.inventory >= 5:
+    if piggy_bank.inventory["coin"] >= 5:
         print("Aus dem Sparschwein ertönt eine blecherne Stimme:")
         print(f"Das zweite Zeichen des Codes lautet: {loesung_wohnung[1]}")
         loesung_wohnung_gefunden[1] = loesung_wohnung[1]
