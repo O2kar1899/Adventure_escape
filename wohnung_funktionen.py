@@ -1,15 +1,22 @@
-from wohnung_instances import player, abstellkammer, arbeitszimmer, bad, balkon_schlafzimmer, \
-    balkon_wohnzimmer, balkon_schlafzimmer, flur, kueche, schlafzimmer, wohnzimmer,\
-        computer_arbeitszimmer, schreibtisch_arbeitszimmer, schreibtisch_schublade, kuehlschrank, \
-            blumentopf_1, schuhschrank, nachttisch 
-
+from wohnung_instances import *
+from time import sleep
 from classes import *
-from wohnung_tasks import loesung,loesung_wohnung_gefunden, task_1_wordle, task_2_coins, task_3_Fibonacci
+from wohnung_tasks import loesung, loesung_wohnung_gefunden, task_1_wordle, task_2_coins, task_3_Fibonacci
 import sys
 
-print("wohnung_funktionen.py wurde geladen.")
 
 
+def hase():
+    if loesung_wohnung_gefunden[0] == loesung[0] and loesung_wohnung_gefunden[1] == loesung[1] and loesung_wohnung_gefunden[2] == loesung[2]: 
+        sleep(1)
+        print("")
+        print('     ()_()')
+        print('    (o___o)')
+        print('  O((")("")')
+        print('')
+        print("Du hast Glück, die letzten beiden Buchstaben bekommst Du einfach so.")
+        print(f"Das Lösungswort: {loesung}\n")
+        loesung_wohnung_gefunden[3] = loesung[3]      
 
 def info_command(location):
     print("INFO:")
@@ -58,9 +65,7 @@ def input_answer(question:str="--> ") -> str:
         answer = input(question).lower().strip()
         return answer
 
-
-def room_acivity(player:str, input:str):
-     
+def room_acivity(player:str, input:str):     
     if player.location == arbeitszimmer:       
         if input == "computer"  or input == "pc": #  ++++++++++++++++++++++ Computer
             print("Willst Du den Computer anschauen oder einschalten?")
@@ -71,15 +76,15 @@ def room_acivity(player:str, input:str):
             else:
                 print("\nDu kannst den Computer nur einschalten oder anschauen. Zu mehr ist er nicht zu gebrauchen.")
         
-        if input == "schreibtisch":# ++++++++++++++++++++++ Schreibtisch
+        elif input == "schreibtisch":# ++++++++++++++++++++++ Schreibtisch
             print(player.location.objects["Schreibtisch"].description)
 
-        if input == "schublade": # ++++++++++++++++++++++ Schublade
-            print("Du öffnest die Schublade.")
+        elif input == "schublade": # ++++++++++++++++++++++ Schublade
+            print("Du öffnest die Schublade vom Schreibtisch.")
             if schreibtisch_schublade.inventory != None:
-                if schreibtisch_arbeitszimmer.inventory["coin"]>0:
+                if schreibtisch_schublade.inventory["coin"]>0:
                     print(f"In der Schublade befindet sich {schreibtisch_schublade.inventory['coin']} Münze")
-                    answer = input("\nMöchtest Du die Münze einsammeln? (ja/nein) --> ").lower().strip()
+                    answer = input_answer("\nMöchtest Du die Münze einsammeln? (ja/nein) --> ")
                     if answer == "ja":
                         player.inventory["coin"] += schreibtisch_schublade.inventory["coin"]
                         schreibtisch_schublade.inventory["coin"] = 0
@@ -88,6 +93,16 @@ def room_acivity(player:str, input:str):
                     print("In der Schublade befindet sich keine Münze.")
             else:
                 print("Die Schublade ist leer.")
+
+    # Abstellkammer - hier passiert nichts
+
+    if player.location == bad:
+        if input == "dusche":
+            print(dusche_badezimmer.description)
+        elif input == "wc":
+            print(wc_badezimmer.description)
+        elif input == "badewanne":
+            print(badewanne.description)
     
     if player.location == balkon_wohnzimmer:
         if input == "blumentopf":
@@ -113,6 +128,10 @@ def room_acivity(player:str, input:str):
                 else:
                     print("\nDer Blumentopf ist schwerer als gedacht. An der Stelle, an welcher der Blumentopf stand, \
                         ist etwas Schmutz zu sehen.")
+        elif input == "liegestuhl":
+            print(player.location.objects['Liegestuhl'].description)
+        elif input == "kerzenständer":
+            print(player.location.objects['Kerzenständer'].description)    
 
     if player.location == flur:
         if input == "schuhschrank":
@@ -137,7 +156,9 @@ def room_acivity(player:str, input:str):
                         else: print("\nDu schließt den Schuhschrank wieder")
                         break
                     else: print("Ich kann Dich leider nicht verstehen.\n")          
-           
+        elif input == "garderobe":
+            print(player.location.objects['Garderobe'].description)
+
     if player.location == kueche:
         if input == "kühlschrank":
             print(kuehlschrank.description)
@@ -155,8 +176,7 @@ def room_acivity(player:str, input:str):
                     else:
                         print("In der Schublade befindet sich keine Münze.")
                 else:
-                    print("Der Kühlschrank ist leer.")
-            
+                    print("Der Kühlschrank ist leer.")            
             elif answer_1 == "putzen":
                 durchgang = 1
                 if kuehlschrank.eigenschaft["sauber"] == False:
@@ -166,23 +186,36 @@ def room_acivity(player:str, input:str):
                     print("Der Kühlschrank ist bereits sauber. Nochmal putzen wäre nicht schlau.")
                     durchgang +=1
                     if durchgang >= 3: kuehlschrank.eigenschaft["sauber"] = False
-       
-if player.location == schlafzimmer:
-    if input == "Nachttsich":
-        print(nachttisch.description)
-        if nachttisch.inventory["coin"] > 0:   
-            print("Oben auf dem Nachttisch liegt eine goldene Münze")
-            answer = input_answer("\nMöchtest Du die Münze einsammeln? (ja/nein) --> ")
-            if answer == "ja":
-                player.inventory["coin"] += 1
-                nachttisch.inventory["coin"] = 0
-                print("Du steckst die Münze ein. Mehr hat der Nachttisch offenbar nicht zu bieten")
-                print(f"Du hast {player.inventory['coin']} Münze(n) in Deiner Tasche")
+        elif input == "herd":
+            print(herd.description)
+        elif input == "schrank":
+            print(schrank_kueche.description)
 
+    if player.location == schlafzimmer:
+        if input == "nachttisch":
+            print(nachttisch.description)
+            if nachttisch.inventory["coin"] > 0:   
+                print("Oben auf dem Nachttisch liegt eine goldene Münze")
+                answer = input_answer("\nMöchtest Du die Münze einsammeln? (ja/nein) --> ")
+                if answer == "ja":
+                    player.inventory["coin"] += 1
+                    nachttisch.inventory["coin"] = 0
+                    print("Du steckst die Münze ein. Mehr hat der Nachttisch offenbar nicht zu bieten")
+                    print(f"Du hast {player.inventory['coin']} Münze(n) in Deiner Tasche")
+        elif input == "bett":
+                print(bett.description)
+        elif input == "kleiderschrank":
+                print(schrank_schlafzimmer.description)
 
     if player.location == wohnzimmer:
         if input == "sparschwein":
             task_2_coins(player=player)
+        elif input == "sofa":
+            print(sofa.description)
+        elif input == "fernseher":
+            print(fernseher.description)
+        elif input == "tisch":
+            print(tisch_wohnzimmer.description)          
 
 def change_room(player:str, input:str)->None:
     """

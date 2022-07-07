@@ -1,7 +1,7 @@
 import sys
 from this import d
-from wohnung_instances import player,piggy_bank, schlafzimmer, coin # im Schlafzimmer startet die Welt "wohnung"
-from wohnung_funktionen import  change_room, help_command, info_command, room_acivity
+from wohnung_instances import player,schlafzimmer, coin # im Schlafzimmer startet die Welt "wohnung"
+from wohnung_funktionen import  change_room, help_command, info_command, room_acivity, hase
 import time
 
 print("main.py wurde geladen.")
@@ -43,26 +43,23 @@ def wohnung():
         
         wohnung_befehl_auswerten(input=player_input, player=player)
         
+        hase()
         if act_location != player.location: # wenn bei der Auswertung der Raum gewechselt wurde
             print(f"\n{player.location.name}\n{player.location.description}")
             #print(f"\nAusgänge: {player.location.exits}")
-            act_location = player.location    
-                   
-       
-    
-   
+            act_location = player.location      
+                        
  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  # ***************************    Das Spiel beginnt     *********************************
  # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
 print("\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n")
 print("Das Spiel beginnt!\n")
-
+hase()
 time.sleep(1)
 
-player.name = input("Gib bitte Deinen Spielernamen ein? ")
+player.name = input("Gib bitte Deinen Spielernamen ein: ")
 player.welt = "wohnung" # Das Spiel startet in der Welt "wohnung"
 player.location = schlafzimmer # Das Spiel startet im Schlafzimmer
-
 
 if player.welt == "wohnung":
     wohnung()

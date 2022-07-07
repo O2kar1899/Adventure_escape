@@ -1,8 +1,6 @@
 
 # ++++++++++++++++++++++++++++++ class Object ++++++++++++++++++++++++++++++
 
-
-
 class Object:
     def __init__(self, name:str="", description:str="", inventory=None, portable: bool =True, weight: int =0, eigenschaft: dict=None):
         self.name = name

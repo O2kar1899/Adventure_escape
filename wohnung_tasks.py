@@ -36,9 +36,9 @@ def task_1_wordle(): # Um die Aufgage zu starten muss man den PC im Arbeitszimme
                     sys.exit()                        
             if attemp == word:
                 print("Du hast das Wort gefunden!")
-                print (f" Das erste Zeichen des Codes: {loesung_wohnung[0]}")
-                print("Der Computer schaltet sich mit einem leisen räuspern wieder aus")
-                loesung_wohnung_gefunden[0] = loesung_wohnung[0]
+                print (f"Das dritte Zeichen des Codes: {loesung_wohnung[2]}")
+                print("\nDer Computer schaltet sich mit einem leisen räuspern wieder aus")
+                loesung_wohnung_gefunden[2] = loesung_wohnung[2]
                 return True
             else:
                 for i in range(len(word)):
