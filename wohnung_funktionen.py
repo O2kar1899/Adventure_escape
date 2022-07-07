@@ -4,7 +4,7 @@ from wohnung_instances import player, abstellkammer, arbeitszimmer, bad, balkon_
             blumentopf_1, schuhschrank, nachttisch 
 
 from classes import *
-from wohnung_tasks import loesung,loesung_wohnung_gefunden, task_1_wordle, task_2_coins
+from wohnung_tasks import loesung,loesung_wohnung_gefunden, task_1_wordle, task_2_coins, task_3_Fibonacci
 import sys
 
 print("wohnung_funktionen.py wurde geladen.")
@@ -30,20 +30,29 @@ def help_command():
     print("Informationen zum aktuellen Raum: info")
     print("Spiel beenden: q oder quit")
     print("Um wieder hierher zu kommen: hilfe oder help")
-
     print(f"Aktueller Ort: {player.location.name}")
-    if player.location.objects != ["???", "???", "???", "???", "???"]:
+    if loesung_wohnung_gefunden != ["???", "???", "???", "???", "???"]:
         print(f"Das Lösungswort: {loesung_wohnung_gefunden}") 
 
 def wohnung_ausgangstuer():
-        code_input = input("\nDie Ausgangstür ist verschlossen. Um sie zu öffnen, musst Du den Code eingeben:\n --> ")
-        if code_input == loesung: 
-            print("\nDu hast den Code erfolgreich eingegeben.\nDie Tür ist jetzt offen.")
-            print("\nDu hast gewonnen! Das Spiel ist vorbei.\n")
-            sys.exit()
-            #player.location = outside
+    print("\nDie Ausgangstür ist verschlossen. Um sie zu öffnen, musst Du den Code mit fünf Zeichen eingeben")
+    print("Alle Informationen, um den Code zu erhalten, findest Du in der Wohnung.")
+    eingeben = input("\nWillst Du den Code eingeben ja/nein --> ")
+    if eingeben == "ja":
+        code_input = input_answer("\nBitte den Code eingeben: ")
+        if loesung_wohnung_gefunden == ["???", "???", "???", "???", "???"]:
+            print("\nEinfach nur raten gilt nicht ;-)")
         else:
-            print("Der Code ist falsch.\nDie Tür bleibt verschlossen.")
+            if code_input == loesung: 
+                print("\nDu hast den Code erfolgreich eingegeben.\nDie Tür ist jetzt offen.")
+                print("\nDu hast gewonnen! Das Spiel ist vorbei.\n")
+                sys.exit()
+                #player.location = outside
+            else:
+                print("Der Code ist falsch.\nDie Tür bleibt verschlossen.")
+    
+    if loesung_wohnung_gefunden[0] == "???":
+        task_3_Fibonacci(player=player)
 
 def input_answer(question:str="--> ") -> str:
         answer = input(question).lower().strip()
@@ -236,7 +245,7 @@ def change_room(player:str, input:str)->None:
         elif input == "s" or "süd" in input:
             player.location = kueche
         elif input == "w" or "west" in input:
-            wohnung_ausgangstuer(player)
+            wohnung_ausgangstuer()
           
     elif player.location == kueche:                                            # Kueche
         if input == "n" or "nord" in input:

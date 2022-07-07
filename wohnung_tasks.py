@@ -9,14 +9,16 @@ for i in range(len(loesung)):
     loesung_wohnung.append(loesung[i])
 loesung_wohnung_gefunden = ["???", "???", "???", "???", "???"]
 
+def input_answer(question:str="--> ") -> str:
+        answer = input(question).lower().strip()
+        return answer
 
-# task_1 Wordle mit variabler Buchstabenanzahl
 def task_1_wordle(): # Um die Aufgage zu starten muss man den PC im Arbeitszimmer einschalten
     """ wordle player must find a specific word with 5 letters
     """   
-    if loesung_wohnung[0] == loesung_wohnung_gefunden[0]:
+    if loesung_wohnung[2] == loesung_wohnung_gefunden[2]:
         print("nach kurzem flackern erscheint auf dem Bildschirm:")
-        print(f"Das erste Zeichen des Codes lautet: {loesung_wohnung[0]}")
+        print(f"Das dritte Zeichen des Codes lautet: {loesung_wohnung[2]}")
         
     else:
         word_list = ["angel", "katze", "mauer", "lauer", "linux", "paul", "charlot", "catharina", "petra", "heiner"]
@@ -49,14 +51,8 @@ def task_1_wordle(): # Um die Aufgage zu starten muss man den PC im Arbeitszimme
                 print(f"Du hast noch {5-t} Versuche.")    
         print("\nDu hast das Wort nicht gefunden.\n")
         print("...versuch es später nochmal!")
-        
-
-# task_2 - 5 coins in the piggy bank
+       
 def task_2_coins(player):
-    print(piggy_bank.description)
-    print(f"Anzahl der Münzen im Sparschwein: {piggy_bank.inventory['coin']}")
-    
-    coins_player = player.inventory["coin"]
     """Orte der Münzen:
         - Arbeitszimmer - Schreibtisch - Schublade
         - Küche - Kühlschrank
@@ -64,6 +60,11 @@ def task_2_coins(player):
         - Flur - Schuhschrank - schwarze Schuhe
         - Schlafzimmer - Nachttisch
     """
+    print(piggy_bank.description)
+    print(f"Anzahl der Münzen im Sparschwein: {piggy_bank.inventory['coin']}")
+    
+    coins_player = player.inventory["coin"]
+    
     if coins_player > 0:
         print(f"Du hast {coins_player} Münzen in deinem Inventar\n")
         while True:
@@ -84,8 +85,24 @@ def task_2_coins(player):
         print(f"Das zweite Zeichen des Codes lautet: {loesung_wohnung[1]}")
         loesung_wohnung_gefunden[1] = loesung_wohnung[1]
 
-def task_3():
-    pass
+def task_3_Fibonacci(player):
+    print("Ein einfaches Rätsel zum Start:")
+    while True:
+        print("Welche Zahl folgt nach |0|1|1|2|3|5|8| ?")
+        if input(" --> ") == "13":
+            print(f"Super! Das erste Zeichen des Codes hast Du gefunden: {loesung_wohnung[0]}")
+            loesung_wohnung_gefunden[0] = loesung_wohnung[0]
+            return True
+        else: 
+            print("Leider falsch. Willst Du gleich noch einmal versuchen? oder erste einen Tipp")
+            answer = input_answer("versuchen/Tipp/Abbrechen? ")
+            if answer == "tipp":
+                print("Fibonacci würde die Antwort kennen")
+            elif answer == "versuchen":
+                pass
+            else:
+                print("Vielleicht kommst Du später nochmal vorbei - Du stehst weiterhin im Flur")
+                return False
 
 def task_4():
     pass

@@ -2,7 +2,6 @@ import sys
 from this import d
 from wohnung_instances import player,piggy_bank, schlafzimmer, coin # im Schlafzimmer startet die Welt "wohnung"
 from wohnung_funktionen import  change_room, help_command, info_command, room_acivity
-from wohnung_tasks import task_1, task_2, task_3, task_4, task_5
 import time
 
 print("main.py wurde geladen.")
